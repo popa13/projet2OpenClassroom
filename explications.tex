@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{listings}
+
+\title{Quelques principes fondamentaux de Git}
+\author{Pierre-Olivier Parisé}
+\begin{document}
+
+\maketitle
+
+Git est un logiciel puissant de versionnement de projets. Pour un informaticien, il s'agit d'un outil maintenant indispensable pour la bonne gestion de ses projets informatiques, autant professionnels que personnels. Dans ce court document, je vous présenterai quelques principes/concepts de base à connaître à tout pris pour bien comprendre le fonctionnement de Git. Ces principes sont les \og commits \fg{}, le fichier \og .log \fg{} et les branches.
+
+\section{Qu'est-ce qu'un commit?}
+
+Un \og commit \fg{} est une façon d'indiquer à Git que vous êtes prêt à apporter des modifications à un/des fichier.s de votre projet. Afin de le spécifier à Git, il faut entrer, en ligne de commandes, la commande \lstinline!git add nomfichier.ext! pour chacun des fichiers et ensuite \lstinline!git commit -m 'Message explicatif'!. 
+
+La première commande permet d'indiquer à Git quels sont les fichiers qui sont ajoutés au \og commit \fg{}. La deuxième commande est le \og commit \fg{} en tant que tel. La partie à partir du \lstinline!-m! permet d'écrire un message qui explique les motifications apportées aux fichiers. 
+
+Un \og commit \fg{} peut être vu comme l'étape précédent l'envoi d'un colis. Une fois toutes les informations nécessaires pour l'envoi du colis sont rassemblées, celui-ci est placé sur les étagères de la compagnie de transport, attendant son envoi ; il est prêt à être envoyé à destination. Cette dernière étape est le \og push \fg{} du colis à destination. Avec le logiciel Git, cette action s'effectue à l'aide de la commande \lstinline!git push origin master!.
+
+\section{À quoi sert la commande \lstinline!git log!}
+
+Reprenons l'exemple de l'envoi du colis. Nous avons maintenant mis notre colis sur l'étagère des colis prêts à être envoyés. D'autres colis seront déposés sur cet étagère et \og commités \fg{} à différentes destinations. Il est important d'avoir une sorte d'historique de chaque colis placé sur l'étagère. Une sorte de fichier \og log \fg{}. 
+
+La commande \lstinline!git log! permet justement d'accéder à cette historique. Dans le contexte du programme Git, nous accédons à l'historique des \og commits \fg{} reliés au projet et des \og push \fg{} du projet via la commande \lstinline!git log!.
+
+\section{Qu'est-ce qu'une branche?}
+
+Poursuivons avec l'exemple du colis. Imaginons que le colis doit se rendre de la ville de Québec jusqu'à Paris. Le trajet principal est que le colis soit envoyé dans un vol direct Québec-Paris. Cependant, il arrive que le colis doit passer par des vols intermédiaires afin de se rendre à destination. 
+
+On peut dire que le trajet principal est la branche principal du projet et que l'idéal serait de pousser nos modifications sur cette branche principal. Or, ceci n'est pas toujours le cas, surtout si on souhaite modifier une certaine fonctionnalité du projet, sans affecter son entièreté. On peut appeler les vols intermédiaires comme des branches secondaires sur lesquels on travaille. Pour créer une nouvelles branche dans Git, on tape la commande suivante : \lstinline!git branch nomBranche!. Ensuite, afin de se positionner sur la branche\footnote{Ceci permet de travailler comme d'habitude sur une autre branche.}, on tape en ligne de commande \lstinline!git checkout nomBranche!. Enfin, lorsque nous voulons joindre nos modifications à la branche principale, on doit
+	\begin{enumerate}
+	\item se positionner sur la branche principale avec la commande \lstinline!git checkout master!;
+	\item taper la commande \lstinline!git merge nomBranche!.
+	\end{enumerate}
+En joingnant la branche, il se peut que des conflits se produisent. On peut les résoudre directement en ouvrant les fichiers.
+\end{document}
